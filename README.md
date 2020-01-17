@@ -1,2 +1,2 @@
-# sound-fun
+# sound-fun 🥳
 Playing with sound. 
