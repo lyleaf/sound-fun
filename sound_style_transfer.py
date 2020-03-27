@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 
 # input: wav file
 # output: wav file
+# you need to download a model checkpoint file from a public website by running:
+# gsutil cp gs://ddsp/models/tf2/solo_flute2_ckpt/* pretrained
 
 
 audio, sr = librosa.load('hello5s.wav')
