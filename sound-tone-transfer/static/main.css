@@ -1,3 +1,5 @@
+
+
 .button-container{
 	display:inline-block;
 	position:relative;
@@ -6,11 +8,17 @@
 
 }
 
+img {
+	width: 100%;
+	height: auto;
+}
+
+
 .start-button {
 	position:relative;
-	bottom: 20em;
-	width: 10em;
-	height: 4em;
+	bottom: 60em;
+	width: 20em;
+	height: 8em;
 	background-color:#F2A51A;
 	border-radius:1.5em;
 	color:white;
@@ -20,9 +28,9 @@
 
 #intro_button {
 	position:relative;
-	bottom: 15em;
-	width: 10em;
-	height: 4em;
+	bottom: 30em;
+	width: 20em;
+	height: 8em;
 	background-color:#F2A51A;
 	border-radius:1.5em;
 	color:white;
@@ -44,9 +52,9 @@
 
 .replay-button{
 	position:relative;
-	bottom: 40em;
-	width: 10em;
-	height: 4em;
+	bottom: 100em;
+	width: 20em;
+	height: 8em;
 	background-color:#F2A51A;
 	border-radius:1.5em;
 	color:white;
@@ -56,9 +64,9 @@
 
 .flute-button{
 	position:relative;
-	bottom: 30em;
-	width: 10em;
-	height: 4em;
+	bottom: 75em;
+	width: 20em;
+	height: 8em;
 	background-color:#F2A51A;
 	border-radius:1.5em;
 	color:white;
@@ -68,9 +76,9 @@
 
 .mixed-button{
 	position:relative;
-	bottom: 20em;
-	width: 10em;
-	height: 4em;
+	bottom: 50em;
+	width: 20em;
+	height: 8em;
 	background-color:#F2A51A;
 	border-radius:1.5em;
 	color:white;
