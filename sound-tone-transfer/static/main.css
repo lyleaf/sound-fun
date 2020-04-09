@@ -1,0 +1,79 @@
+.button-container{
+	display:inline-block;
+	position:relative;
+	text-align: center;
+	width: 100%;
+
+}
+
+.start-button {
+	position:relative;
+	bottom: 20em;
+	width: 10em;
+	height: 4em;
+	background-color:#F2A51A;
+	border-radius:1.5em;
+	color:white;
+	text-transform:uppercase;
+	display: inline-block;
+}
+
+#intro_button {
+	position:relative;
+	bottom: 15em;
+	width: 10em;
+	height: 4em;
+	background-color:#F2A51A;
+	border-radius:1.5em;
+	color:white;
+	text-transform:uppercase;
+	display: inline-block;
+}
+
+.loading-bar {
+	position:relative;
+	bottom: 14em;
+	width: 4em;
+	height: 4em;
+	border-radius:1.5em;
+	color:white;
+	text-transform:uppercase;
+	display: inline-block;	
+}
+
+
+.replay-button{
+	position:relative;
+	bottom: 40em;
+	width: 10em;
+	height: 4em;
+	background-color:#F2A51A;
+	border-radius:1.5em;
+	color:white;
+	text-transform:uppercase;
+	display: inline-block;
+}
+
+.flute-button{
+	position:relative;
+	bottom: 30em;
+	width: 10em;
+	height: 4em;
+	background-color:#F2A51A;
+	border-radius:1.5em;
+	color:white;
+	text-transform:uppercase;
+	display: inline-block;
+}
+
+.mixed-button{
+	position:relative;
+	bottom: 20em;
+	width: 10em;
+	height: 4em;
+	background-color:#F2A51A;
+	border-radius:1.5em;
+	color:white;
+	text-transform:uppercase;
+	display: inline-block;
+}

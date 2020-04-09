@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <title>JANA GANA MANA</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+  </head>
+  <body>
+
+
+    <div class="button-container">
+      <img src="{{ url_for('static', filename='intro_1.png') }}" />
+      <button class="start-button" id="intro_button" onclick="recordButtonAction()">TRY IT MYSELF</button>
+    </div>
+
+    <script type="text/javascript">
+      document.getElementById("intro_button").onclick = function () {
+          location.href = "/start";
+      };
+    </script>
+  </body>
+</html>
