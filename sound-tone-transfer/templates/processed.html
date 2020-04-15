@@ -16,22 +16,18 @@
 
 	<script src="{{ url_for('static', filename='index.js') }}"></script>
     <div class="button-container">
-      <img src="{{ url_for('static', filename='processed.png') }}" />
-      <button class="replay-button" type="button" onclick="playSoundReplay()">Replay</button>   
-<!--   <audio controls id="audio">
-    <source id="processed_id" src="" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio> -->
-    </div>
+      <div>
+        <div>
+          <img src="https://storage.googleapis.com/sound-of-india/processed.png" />
+            <button class="replay-button" type="button" onclick="playSoundReplay()">Replay</button>
+            <button class="flute-button" type="button" onclick="playSoundFlute()">Flute Sound</button>
 
-    <div class="button-container">
-      <button class="flute-button" type="button" onclick="playSoundFlute()">Flute Sound</button>
-    </div>
-<!-- <button class="flute-button" type="button" onclick="playSoundFlute()">Flute Sound</button>
-      <button class="mixed-button" type="button" onclick="playSoundMixed()">Mixed Sound</button>
- -->
-    <div class="button-container">
-      <button class="mixed-button" type="button" onclick="playSoundMixed()">Mixed Sound</button>
+      <img class="replay-button" type="button" src="{{ url_for('static', filename='speaker.png') }}" onclick="playSoundReplay()" />
+
+    <img class="flute-button" type="button" src="{{ url_for('static', filename='speaker.png') }}" onclick="playSoundFlute()" />
+  <!--           <button class="mixed-button" type="button" onclick="playSoundMixed()">Mixed Sound</button> -->
+  <img class="mixed-button" type="button" src="{{ url_for('static', filename='speaker.png') }}" onclick="playSoundMixed()" />
+      </div>
     </div>
 
       <audio id="mixed_sound_id">

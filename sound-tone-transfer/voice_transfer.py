@@ -236,10 +236,10 @@ class VoiceTransfer(object):
         return self.output_file, self.output_mixed_file, self.original_file
 
 if __name__ == '__main__':
-    vt = VoiceTransfer('./sound/tanvi.webm')
+    vt = VoiceTransfer('./sound/slow_jana.mp3')
     vt.extract_feature()
-    vt.load_model('Violin')
-    for f0_octave_shift in np.arange(-2, 2, 1):
-      for f0_confidence_threshold in np.arange(0.0, 1.0, 0.2):
-        for loudness_db_shift in np.arange(-20, 21, 10):
+    vt.load_model('Flute2')
+    for f0_octave_shift in np.arange(0, 1, 1):
+      for f0_confidence_threshold in np.arange(0.2, 0.5, 0.2):
+        for loudness_db_shift in np.arange(-20, 21, 5):
           output_file = vt.transfer(f0_octave_shift, f0_confidence_threshold, loudness_db_shift)

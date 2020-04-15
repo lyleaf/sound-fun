@@ -1,0 +1,4 @@
+sound/
+pretrained/
+__pycache__/
+test/
