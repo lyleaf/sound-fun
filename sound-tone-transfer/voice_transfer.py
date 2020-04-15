@@ -216,7 +216,7 @@ class VoiceTransfer(object):
           f0_octave_shift,
           f0_confidence_threshold,
           loudness_db_shift)
-        librosa.output.write_wav(self.output_file, audio_gen, self.sr)
+        librosa.output.write_wav(self.output_file, audio_gen, self.sr, True)
 
         audio_np = self.audio.flatten()[:len(audio_gen)]
         self.output_mixed_file = './sound/%s_%s_%d_%1.2f_%d_voice_transfer_mixed.wav' % (
@@ -227,16 +227,16 @@ class VoiceTransfer(object):
           loudness_db_shift)
         #audio_mixed = np.vstack((audio_gen_np,audio_np))
         librosa.output.write_wav(self.output_mixed_file, 
-          np.asfortranarray(np.vstack((audio_gen,audio_np))), self.sr)
+          np.asfortranarray(np.vstack((audio_gen,audio_np))), self.sr, True)
 
         self.original_file = './sound/%s.wav' % sound_id
-        librosa.output.write_wav(self.original_file, audio_np, self.sr)
+        librosa.output.write_wav(self.original_file, audio_np, self.sr, True)
         print('Saved to %s, %s, %s' % (self.output_file, self.output_mixed_file, self.original_file))
 
         return self.output_file, self.output_mixed_file, self.original_file
 
 if __name__ == '__main__':
-    vt = VoiceTransfer('./sound/slow_jana.mp3')
+    vt = VoiceTransfer('./sound/Adi.wav')
     vt.extract_feature()
     vt.load_model('Flute2')
     for f0_octave_shift in np.arange(0, 1, 1):

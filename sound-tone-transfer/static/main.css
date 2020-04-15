@@ -11,6 +11,19 @@ img {
   height: auto;
 }
 
+.processed-next-button{
+  position: absolute;
+	left: 50%;
+	bottom: 7%;
+	height: 10vw;
+	width: 20vw;
+  margin-left: -10vw; 
+  display: inline-block;
+  background-color:#F2A51A;
+	border-radius:5vw;
+  font-size: 3vw;
+}
+
 
 .start-button {
   position: absolute;
@@ -24,6 +37,33 @@ img {
 	border-radius:5vw;
   font-size: 3vw;
 }
+
+.play-sample-button {
+	  position: absolute;
+	left: 50%;
+	bottom: 30%;
+	height: 10vw;
+	width: 20vw;
+  margin-left: -10vw; 
+  display: inline-block;
+  background-color:#F2A51A;
+	border-radius:5vw;
+  font-size: 3vw;
+}
+
+.exit-button{
+	  position: absolute;
+	left: 50%;
+	bottom: 24%;
+	height: 10vw;
+	width: 20vw;
+  margin-left: -10vw; 
+  display: inline-block;
+  background-color:#F2A51A;
+	border-radius:5vw;
+  font-size: 3vw;
+}
+
 
 .loading-bar {
 	position:absolute;

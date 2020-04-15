@@ -21,6 +21,11 @@ def home():
     app.logger.debug('hello home')
     return render_template('home.html')
 
+@app.route("/exit")
+def exit():
+    app.logger.debug('hello exit')
+    return render_template('exit.html')
+
 @app.route("/processed")
 def processed():
     return render_template('processed.html')
@@ -43,7 +48,7 @@ def process():
         vt = VoiceTransfer('./sound/%s' % fn)
         vt.extract_feature()
         vt.load_model('Flute')
-        output_file, output_mix_file, original_file = vt.transfer(1, 0.6, -20)
+        output_file, output_mix_file, original_file = vt.transfer(0, 0.4, -5)
         print(output_file, output_mix_file, original_file)
         
         storage_client = storage.Client()

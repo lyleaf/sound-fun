@@ -45,7 +45,15 @@
         Your browser does not support the audio element.
       </audio>
 
+            <button class="processed-next-button" id="processed_next_button">Next</button>
+
+
       <script type="text/javascript">
+          document.getElementById("processed_next_button").onclick = function (){
+            location.href = "/exit";
+          };
+
+
         fileName = window.location.search.split("=")[1];
         console.log(fileName);
 
