@@ -74,5 +74,27 @@ def savesound():
         file.save('./sound/%s' % fn) 
         return "saved!"
 
+@app.route("/upload_to_gcs", methods=["POST"])
+def upload_to_gcs():
+    if request.method == 'POST':
+        print(request.headers)
+        print("happy")
+        print(request)
+        print(request.form)
+        print(request.data)
+        print(request.files)
+        file = request.files['audio_data']
+        file_name = request.files['audio_data'].filename # file_name is the file name
+        file_path = './sound/donate/%s' % fn # file_path is the local file path
+        file.save(file_path) 
+        blob_name = file_path.split('/')[-1] # blob_name is the name on GCS
+        print('blob name is %s' % blob_name)
+        blob = bucket.blob(blob_name)
+        blob.upload_from_filename(file_path)
+        blob.make_public()
+        print(blob.media_link)
+        # Needs to clean up and delete the local files
+        return "saved!"
+
 if __name__ == '__main__':
     app.run(debug=True, port="5443")
