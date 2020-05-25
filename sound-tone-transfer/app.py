@@ -30,6 +30,10 @@ def exit():
 def processed():
     return render_template('processed.html')
 
+@app.route("/donate")
+def donate():
+    return render_template('donate.html')
+
 @app.route("/processing")
 def processing():
     return render_template('processing.html')
