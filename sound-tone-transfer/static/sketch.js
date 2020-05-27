@@ -59,12 +59,6 @@ function upload() {
   oReq.send(fd);
 }
 
-function preload() {
-  
-
-  //vid.hide(); 
-}
-
 function vidLoad() {
   vid.center();
   vid.volume(0);
@@ -110,6 +104,9 @@ function setup() {
   upload_button.style('background-color', col);
   upload_button.style('font-size', '30px');
   upload_button.hide();
-
-
 }
+
+// function draw() {
+//   var vol = mic.getLevel();
+//   ellipse(width/2, height/2, vol*100);
+// }
