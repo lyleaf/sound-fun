@@ -1,11 +1,11 @@
 let playing = false;
 
 let mic, recorder, soundFile;
-let record_button, upload_button;
+let record_button, upload_button, playback_button;
 let vid;
 let soundBlob;
 let recordTimeLength = 62;
-
+let img;
 
 function create_UUID(){
     var dt = new Date().getTime();
@@ -66,16 +66,20 @@ function vidLoad() {
   vid.center();
 }
 
+function preload() {
+  img = loadImage('static/guy.png');
+  imageMode(CORNER);
+}
+
 function setup() {
   var cnv = createCanvas(windowWidth, windowHeight);
   cnv.style('background-color', color('#FCB017'));
   cnv.style('z-index', -1)
 
-  textSize(windowWidth * 0.02);
-  textAlign(CENTER);
-  text('Sing along to the video. Sing the full song.', windowWidth * 0.5, windowHeight * 0.2);
+
+
   vid = createVideo(
-    ['static/background_video.webm'],
+    ['static/janadonate.mp4'],
     vidLoad
   );
 
@@ -88,14 +92,11 @@ function setup() {
   recorder.setInput(mic);
   soundFile = new p5.SoundFile();
 
+
+
   let col = color(25, 23, 200, 50);
 
-
-  textSize(windowWidth * 0.02);
-  textAlign(CENTER);
-  text('Recording will automaticaly start when the video play and stop when the video finish(60 seconds).', windowWidth * 0.5, windowHeight * 0.75);
-
-  record_button = createButton('Play Video And Record');
+  record_button = createButton('Record');
   record_button.mousePressed(playVidAndRecord); 
   record_button.position(windowWidth * 0.4, windowHeight * 0.77);
   record_button.style('background-color', col);
@@ -116,7 +117,21 @@ function setup() {
   upload_button.hide();
 }
 
-// function draw() {
-//   var vol = mic.getLevel();
-//   ellipse(width/2, height/2, vol*100);
-// }
+function draw() {
+  background('#FCB017');
+  image(img, windowWidth * 0.48, windowHeight * 0.02, windowHeight * 0.1, windowHeight * 0.13);
+  textSize(windowWidth * 0.02);
+  textAlign(CENTER);
+  text('Sing along to the video. Sing the full song.', windowWidth * 0.5, windowHeight * 0.2);
+
+  textSize(windowWidth * 0.02);
+  textAlign(CENTER);
+  text('Recording will automaticaly start when the video play and stop when the video finish(60 seconds).', windowWidth * 0.5, windowHeight * 0.75);
+
+
+  if (playing) {
+    var vol = mic.getLevel();
+    console.log(vol)
+    ellipse(windowWidth * 0.7, windowHeight * 0.8, vol*1000);
+  }
+}
