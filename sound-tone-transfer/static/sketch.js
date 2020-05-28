@@ -40,6 +40,7 @@ function replay() {
 
 function recordFinish() {
   soundBlob = soundFile.getBlob();
+  record_button.html("Play & Record");
   upload_button.show(); 
   playback_button.show();
 }
@@ -54,14 +55,15 @@ function upload() {
 
   var oReq = new XMLHttpRequest();
   oReq.open("POST", serverUrl, true);
-  var fd = new FormData();
+  var fd = new FormData(); 
   fd.append("audio_data", soundBlob, fileName)
   oReq.send(fd);
+  
+  upload_button.html("Uploaded, thank you!")
 }
 
 function vidLoad() {
   vid.center();
-  vid.volume(0);
 }
 
 function setup() {
@@ -69,12 +71,15 @@ function setup() {
   cnv.style('background-color', color('#FCB017'));
   cnv.style('z-index', -1)
 
+  textSize(windowWidth * 0.02);
+  textAlign(CENTER);
+  text('Sing along to the video. Sing the full song.', windowWidth * 0.5, windowHeight * 0.2);
   vid = createVideo(
     ['static/background_video.webm'],
     vidLoad
   );
 
-  vid.size(400, 400);
+  vid.size(windowWidth * 0.4, AUTO);
 
 
   mic = new p5.AudioIn();
@@ -85,24 +90,29 @@ function setup() {
 
   let col = color(25, 23, 200, 50);
 
+
+  textSize(windowWidth * 0.02);
+  textAlign(CENTER);
+  text('Recording will automaticaly start when the video play and stop when the video finish(60 seconds).', windowWidth * 0.5, windowHeight * 0.75);
+
   record_button = createButton('Play Video And Record');
   record_button.mousePressed(playVidAndRecord); 
-  record_button.position(windowWidth * 0.4, windowHeight * 0.7);
+  record_button.position(windowWidth * 0.4, windowHeight * 0.77);
   record_button.style('background-color', col);
-  record_button.style('font-size', '30px');
+  record_button.style('font-size', '2vw');
 
   playback_button = createButton('Playback');
   playback_button.mousePressed(replay); 
-  playback_button.position(windowWidth * 0.4, windowHeight * 0.8);
+  playback_button.position(windowWidth * 0.4, windowHeight * 0.84);
   playback_button.style('background-color', col);
-  playback_button.style('font-size', '30px');
+  playback_button.style('font-size', '2vw');
   playback_button.hide();
 
-  upload_button = createButton('upload');
+  upload_button = createButton('Upload');
   upload_button.mousePressed(upload); 
-  upload_button.position(windowWidth * 0.4, windowHeight * 0.9);
+  upload_button.position(windowWidth * 0.4, windowHeight * 0.91);
   upload_button.style('background-color', col);
-  upload_button.style('font-size', '30px');
+  upload_button.style('font-size', '2vw');
   upload_button.hide();
 }
 
