@@ -8,10 +8,11 @@ let mic, recorder, soundFile;
 let record_button, upload_button, playback_button;
 let vid;
 let soundBlob;
-let recordTimeLength = 71;
+let recordTimeLength = 70;
 let img;
 let col;
 let font;
+let myFont;
 
 let recording;
 let buttonWidth = 0.25
@@ -55,14 +56,21 @@ function playVidAndRecord()  {
   }
 }
 
+function replay_end() {
+  playback_button.html('Playback Your Recording');
+  playback = true;
+  playbackEle.time(7);
+}
+
 function replay() {
-  if (playback) {
-    playbackEle.loop();
-    playback_button.html('Pause')
+   if (playback) {
+    playbackEle.play();
+    playback_button.html('Pause');
+    playbackEle.onended(replay_end)
   }
   else {
     playbackEle.pause();
-    playback_button.html('Playback Your Recording')
+    playback_button.html('Continue To Play')
   }
   playback = !playback;
 }
@@ -76,6 +84,7 @@ function recordFinish() {
     playback_button.show();
     blobUrl = URL.createObjectURL(soundBlob);
     playbackEle = createAudio(blobUrl);
+    playbackEle.time(7);
     recording.hide();
   }
 }
@@ -105,6 +114,7 @@ function vidLoad() {
 function preload() {
   img = loadImage('static/guy.png');
   imageMode(CENTER);
+  myFont = loadFont("static/font.ttf", font => {textFont(font, 100);});
 }
 
 function windowResized() {
@@ -122,7 +132,7 @@ function setup() {
    
 
   col = color('white');
-
+ 
 
 
   vid = createVideo(
@@ -161,6 +171,7 @@ function draw() {
 
   recording.position(windowWidth * 0.5 - windowWidth * 0.4 / 2.0, windowHeight * 0.78);  
   recording.size(windowWidth * 0.4, windowHeight * 0.3); 
+  record_button.style('font-size', '1vh');
 
 
   record_button.position(windowWidth * 0.5 - windowWidth * buttonWidth / 2.0, windowHeight * 0.81);
@@ -184,20 +195,23 @@ function draw() {
   upload_button.size(windowWidth * buttonWidth, windowHeight * buttonHeight);
 
 
-  image(img, windowWidth * 0.48, windowHeight * 0.02, windowHeight * 0.1, windowHeight * 0.13);
-  textSize(windowHeight * 0.02);
+  image(img, windowWidth * 0.5 - windowHeight * 0.05, windowHeight * 0.02, windowHeight * 0.1, windowHeight * 0.13);
+  
+
+  textLeading(windowHeight * 0.005);
+  textSize(windowHeight * 0.03);
   textAlign(CENTER);
-  font = loadFont('static/font.ttf');
-  textFont(font);
-  text(`Sing along with the video below. Please sing the entire anthem at one go.`, 
-    windowWidth * 0.5 - windowWidth * 0.4 / 2, windowHeight * 0.2,
-    windowWidth * 0.4, windowHeight * 0.3);
+  
+
+
+  fill(50);
+  text(`Sing along with the video below. Please wear your headphones and sing the entire anthem at one go.`, 
+    windowWidth * 0.5 - windowWidth * 0.6 / 2, windowHeight * 0.2,
+    windowWidth * 0.6, windowHeight * 0.4);
 
   textSize(windowHeight * 0.02);
-  textAlign(CENTER);
-  text(`Recording will automatically start when the video plays and 
-    stop  when the video finishes (~60s).`, 
-    windowWidth * 0.5 - windowWidth * 0.3 / 2, windowHeight * 0.715,
-    windowWidth * 0.3, windowHeight * 0.3);
+   text(`Recording will automatically start when the video plays and stop  when the video finishes (~60s).`, 
+    windowWidth * 0.5 - windowWidth * 0.5 / 2, windowHeight * 0.73,
+    windowWidth * 0.5, windowHeight * 0.3);
 
 }
