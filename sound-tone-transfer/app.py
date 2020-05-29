@@ -22,6 +22,11 @@ def home():
     app.logger.debug('hello home')
     return render_template('home.html')
 
+@app.route("/thankyou")
+def thankyou():
+    app.logger.debug('thankyou')
+    return render_template('thankyou.html')
+
 @app.route("/exit")
 def exit():
     app.logger.debug('hello exit')
