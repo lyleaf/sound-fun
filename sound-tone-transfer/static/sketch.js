@@ -10,6 +10,8 @@ let vid;
 let soundBlob;
 let recordTimeLength = 66;
 let img;
+let col;
+let font;
 
 let buttonWidth = 0.25
 let buttonHeight = 0.04
@@ -92,14 +94,20 @@ function vidLoad() {
 
 function preload() {
   img = loadImage('static/guy.png');
-  imageMode(CORNER);
-  loadFont('static/font.ttf');
+  imageMode(CENTER);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
 
 function setup() {
   var cnv = createCanvas(windowWidth, windowHeight);
   cnv.style('background-color', color('#FCB017'));
-  cnv.style('z-index', -1)
+  cnv.style('z-index', -1);
+   
+
+  col = color('white');
 
 
 
@@ -117,45 +125,51 @@ function setup() {
   recorder.setInput(mic);
   soundFile = new p5.SoundFile();
 
-
-
-  let col = color('white');
-
   record_button = createButton('Play Video & Record Voice');
   record_button.mousePressed(playVidAndRecord); 
-  record_button.position(windowWidth * 0.5 - windowWidth * buttonWidth / 2.0, windowHeight * 0.81);
   record_button.style('background-color', col);
+
+  playback_button = createButton('Playback Your Recording');
+  playback_button.mousePressed(replay); 
+  playback_button.hide();
+
+  upload_button = createButton(`I'm Happy! Submit`);
+  upload_button.mousePressed(upload); 
+  upload_button.hide();
+  noLoop();
+}
+
+function draw() {
+  background('#FCB017');
+
+  vid.center();
+
+  record_button.position(windowWidth * 0.5 - windowWidth * buttonWidth / 2.0, windowHeight * 0.81);
   record_button.style('font-size', buttonFontSize);
   record_button.style('border', 0);
   record_button.style('border-radius', borderRadius);
   record_button.size(windowWidth * buttonWidth, windowHeight * buttonHeight);
 
-  playback_button = createButton('Playback Your Recording');
-  playback_button.mousePressed(replay); 
   playback_button.position(windowWidth * 0.5 - windowWidth * buttonWidth / 2.0, windowHeight * 0.86);
   playback_button.style('background-color', col);
   playback_button.style('font-size', buttonFontSize);
   playback_button.style('border', 0);
   playback_button.style('border-radius', borderRadius);
   playback_button.size(windowWidth * buttonWidth, windowHeight * buttonHeight);
-  playback_button.hide();
 
-  upload_button = createButton(`I'm Happy! Submit`);
-  upload_button.mousePressed(upload); 
   upload_button.position(windowWidth * 0.5 - windowWidth * buttonWidth / 2.0, windowHeight * 0.91);
   upload_button.style('background-color', col);
   upload_button.style('font-size', buttonFontSize);
   upload_button.style('border', 0);
   upload_button.style('border-radius', borderRadius);
   upload_button.size(windowWidth * buttonWidth, windowHeight * buttonHeight);
-  upload_button.hide();
-}
 
-function draw() {
-  background('#FCB017');
+
   image(img, windowWidth * 0.48, windowHeight * 0.02, windowHeight * 0.1, windowHeight * 0.13);
   textSize(windowHeight * 0.02);
   textAlign(CENTER);
+  font = loadFont('static/font.ttf');
+  textFont(font);
   text(`Sing along with the video below. Please sing the entire anthem at one go.`, 
     windowWidth * 0.5 - windowWidth * 0.4 / 2, windowHeight * 0.2,
     windowWidth * 0.4, windowHeight * 0.3);
@@ -167,10 +181,4 @@ function draw() {
     windowWidth * 0.5 - windowWidth * 0.3 / 2, windowHeight * 0.715,
     windowWidth * 0.3, windowHeight * 0.3);
 
-
-  if (playing) {
-    var vol = mic.getLevel();
-    console.log(vol)
-    ellipse(windowWidth * 0.7, windowHeight * 0.8, vol*1000);
-  }
 }
