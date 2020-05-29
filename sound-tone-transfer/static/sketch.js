@@ -8,11 +8,12 @@ let mic, recorder, soundFile;
 let record_button, upload_button, playback_button;
 let vid;
 let soundBlob;
-let recordTimeLength = 66;
+let recordTimeLength = 71;
 let img;
 let col;
 let font;
 
+let recording;
 let buttonWidth = 0.25
 let buttonHeight = 0.04
 let buttonFontSize = '2vh'
@@ -36,6 +37,7 @@ function playVidAndRecord()  {
     recorder.stop();
     hasGoodRecording = false;
     record_button.html('Play Video & Record Voice');
+    recording.hide();
   } else { // when not playing, clicking on button will start video, record sound
     vid.play();
     hasGoodRecording = true;
@@ -44,6 +46,12 @@ function playVidAndRecord()  {
     recorder.record(soundFile, recordTimeLength, recordFinish);
     record_button.html('Click to start over');
     playing = true;
+    recording.show();
+
+    // recording = text(`Recording...`, 
+    // windowWidth * 0.5 - windowWidth * 0.4 / 2.0, windowHeight * 0.78,
+    // windowWidth * 0.4, windowHeight * 0.3);
+
   }
 }
 
@@ -68,13 +76,14 @@ function recordFinish() {
     playback_button.show();
     blobUrl = URL.createObjectURL(soundBlob);
     playbackEle = createAudio(blobUrl);
+    recording.hide();
   }
 }
 
 function upload() {
   let fileName = `donate_${create_UUID()}.wav`;
   console.log(fileName);
-  saveSound(soundFile, fileName);
+  // saveSound(soundFile, fileName);
 
   let serverUrl = '/upload_to_gcs';
   soundBlob = soundFile.getBlob();
@@ -86,6 +95,7 @@ function upload() {
   oReq.send(fd);
   
   upload_button.html("Uploaded, thank you!")
+  window.location.href = `/thankyou`;
 }
 
 function vidLoad() {
@@ -105,6 +115,10 @@ function setup() {
   var cnv = createCanvas(windowWidth, windowHeight);
   cnv.style('background-color', color('#FCB017'));
   cnv.style('z-index', -1);
+
+  recording = createDiv('Recording...'); 
+  recording.style('text-align', 'center'); 
+  recording.hide();
    
 
   col = color('white');
@@ -112,7 +126,7 @@ function setup() {
 
 
   vid = createVideo(
-    ['static/janadonate.mp4'],
+    ['static/janadonate_v1.mp4'],
     vidLoad
   );
 
@@ -143,6 +157,11 @@ function draw() {
   background('#FCB017');
 
   vid.center();
+
+
+  recording.position(windowWidth * 0.5 - windowWidth * 0.4 / 2.0, windowHeight * 0.78);  
+  recording.size(windowWidth * 0.4, windowHeight * 0.3); 
+
 
   record_button.position(windowWidth * 0.5 - windowWidth * buttonWidth / 2.0, windowHeight * 0.81);
   record_button.style('font-size', buttonFontSize);
