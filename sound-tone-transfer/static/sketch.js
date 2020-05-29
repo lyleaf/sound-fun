@@ -122,7 +122,6 @@ function setup() {
   let col = color('white');
 
   record_button = createButton('Play Video & Record Voice');
-  record_button.mousePressed(playVidAndRecord); 
   record_button.position(windowWidth * 0.5 - windowWidth * buttonWidth / 2.0, windowHeight * 0.81);
   record_button.style('background-color', col);
   record_button.style('font-size', buttonFontSize);
