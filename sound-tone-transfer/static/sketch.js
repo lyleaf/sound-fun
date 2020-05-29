@@ -1,11 +1,20 @@
 let playing = false;
+let hasGoodRecording = false;
+let playback = true;
+let blobUrl; 
+let playbackEle;
 
 let mic, recorder, soundFile;
 let record_button, upload_button, playback_button;
 let vid;
 let soundBlob;
-let recordTimeLength = 62;
+let recordTimeLength = 66;
 let img;
+
+let buttonWidth = 0.25
+let buttonHeight = 0.04
+let buttonFontSize = '2vh'
+let borderRadius = '25px'
 
 function create_UUID(){
     var dt = new Date().getTime();
@@ -23,26 +32,41 @@ function playVidAndRecord()  {
     vid.stop();
     playing = false;
     recorder.stop();
-    record_button.html('Play & Record');
+    hasGoodRecording = false;
+    record_button.html('Play Video & Record Voice');
   } else { // when not playing, clicking on button will start video, record sound
     vid.play();
+    hasGoodRecording = true;
+    upload_button.hide();
+    playback_button.hide();
     recorder.record(soundFile, recordTimeLength, recordFinish);
-    record_button.html('recording now! click to restart');
+    record_button.html('Click to start over');
     playing = true;
   }
 }
 
 function replay() {
-  let blobUrl = URL.createObjectURL(soundBlob);
-  ele = createAudio(blobUrl);
-  ele.autoplay(true);
+  if (playback) {
+    playbackEle.loop();
+    playback_button.html('Pause')
+  }
+  else {
+    playbackEle.pause();
+    playback_button.html('Playback Your Recording')
+  }
+  playback = !playback;
 }
 
 function recordFinish() {
   soundBlob = soundFile.getBlob();
-  record_button.html("Play & Record");
-  upload_button.show(); 
-  playback_button.show();
+  playing = false;
+  if (hasGoodRecording) {
+    record_button.html("Play Video & Record Voice");
+    upload_button.show(); 
+    playback_button.show();
+    blobUrl = URL.createObjectURL(soundBlob);
+    playbackEle = createAudio(blobUrl);
+  }
 }
 
 function upload() {
@@ -69,6 +93,7 @@ function vidLoad() {
 function preload() {
   img = loadImage('static/guy.png');
   imageMode(CORNER);
+  loadFont('static/font.ttf');
 }
 
 function setup() {
@@ -94,39 +119,53 @@ function setup() {
 
 
 
-  let col = color(25, 23, 200, 50);
+  let col = color('white');
 
-  record_button = createButton('Record');
+  record_button = createButton('Play Video & Record Voice');
   record_button.mousePressed(playVidAndRecord); 
-  record_button.position(windowWidth * 0.4, windowHeight * 0.77);
+  record_button.position(windowWidth * 0.5 - windowWidth * buttonWidth / 2.0, windowHeight * 0.81);
   record_button.style('background-color', col);
-  record_button.style('font-size', '2vw');
+  record_button.style('font-size', buttonFontSize);
+  record_button.style('border', 0);
+  record_button.style('border-radius', borderRadius);
+  record_button.size(windowWidth * buttonWidth, windowHeight * buttonHeight);
 
-  playback_button = createButton('Playback');
+  playback_button = createButton('Playback Your Recording');
   playback_button.mousePressed(replay); 
-  playback_button.position(windowWidth * 0.4, windowHeight * 0.84);
+  playback_button.position(windowWidth * 0.5 - windowWidth * buttonWidth / 2.0, windowHeight * 0.86);
   playback_button.style('background-color', col);
-  playback_button.style('font-size', '2vw');
+  playback_button.style('font-size', buttonFontSize);
+  playback_button.style('border', 0);
+  playback_button.style('border-radius', borderRadius);
+  playback_button.size(windowWidth * buttonWidth, windowHeight * buttonHeight);
   playback_button.hide();
 
-  upload_button = createButton('Upload');
+  upload_button = createButton(`I'm Happy! Submit`);
   upload_button.mousePressed(upload); 
-  upload_button.position(windowWidth * 0.4, windowHeight * 0.91);
+  upload_button.position(windowWidth * 0.5 - windowWidth * buttonWidth / 2.0, windowHeight * 0.91);
   upload_button.style('background-color', col);
-  upload_button.style('font-size', '2vw');
+  upload_button.style('font-size', buttonFontSize);
+  upload_button.style('border', 0);
+  upload_button.style('border-radius', borderRadius);
+  upload_button.size(windowWidth * buttonWidth, windowHeight * buttonHeight);
   upload_button.hide();
 }
 
 function draw() {
   background('#FCB017');
   image(img, windowWidth * 0.48, windowHeight * 0.02, windowHeight * 0.1, windowHeight * 0.13);
-  textSize(windowWidth * 0.02);
+  textSize(windowHeight * 0.02);
   textAlign(CENTER);
-  text('Sing along to the video. Sing the full song.', windowWidth * 0.5, windowHeight * 0.2);
+  text(`Sing along with the video below. Please sing the entire anthem at one go.`, 
+    windowWidth * 0.5 - windowWidth * 0.4 / 2, windowHeight * 0.2,
+    windowWidth * 0.4, windowHeight * 0.3);
 
-  textSize(windowWidth * 0.02);
+  textSize(windowHeight * 0.02);
   textAlign(CENTER);
-  text('Recording will automaticaly start when the video play and stop when the video finish(60 seconds).', windowWidth * 0.5, windowHeight * 0.75);
+  text(`Recording will automatically start when the video plays and 
+    stop  when the video finishes (~60s).`, 
+    windowWidth * 0.5 - windowWidth * 0.3 / 2, windowHeight * 0.715,
+    windowWidth * 0.3, windowHeight * 0.3);
 
 
   if (playing) {

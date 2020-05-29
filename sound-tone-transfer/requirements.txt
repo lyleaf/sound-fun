@@ -1,0 +1,6 @@
+crepe
+flask
+tensorflow
+google-cloud-storage
+librosa
+ddsp
