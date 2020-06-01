@@ -41,7 +41,9 @@ function playVidAndRecord()  {
     recording.hide();
   } else { // when not playing, clicking on button will start video, record sound
     vid.play();
-    //playbackEle.pause();
+    if (hasGoodRecording) {
+      playbackEle.pause();
+    } 
     hasGoodRecording = true;
     upload_button.hide();
     playback_button.hide();
