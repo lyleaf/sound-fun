@@ -41,6 +41,7 @@ function playVidAndRecord()  {
     recording.hide();
   } else { // when not playing, clicking on button will start video, record sound
     vid.play();
+    //playbackEle.pause();
     hasGoodRecording = true;
     upload_button.hide();
     playback_button.hide();
@@ -136,7 +137,7 @@ function setup() {
 
 
   vid = createVideo(
-    ['static/janadonate_v1.mp4'],
+    ['static/janadonate_v2.mp4'],
     vidLoad
   );
 
