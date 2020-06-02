@@ -12,7 +12,6 @@ let recordTimeLength = 70;
 let img;
 let col;
 let font;
-let myFont;
 
 let recording;
 let buttonWidth = 0.25
@@ -84,6 +83,7 @@ function recordFinish() {
   if (hasGoodRecording) {
     record_button.html("Play Video & Record Voice");
     upload_button.show(); 
+    playback_button.html('Playback Your Recording');
     playback_button.show();
     blobUrl = URL.createObjectURL(soundBlob);
     playbackEle = createAudio(blobUrl);
@@ -110,14 +110,10 @@ function upload() {
   window.location.href = `/thankyou`;
 }
 
-function vidLoad() {
-  vid.center();
-}
-
 function preload() {
   img = loadImage('static/guy.png');
-  imageMode(CENTER);
-  myFont = loadFont("static/font.ttf", font => {textFont(font, 100);});
+  //imageMode(CENTER);
+  vid = createVideo(['static/janadonate_v2.mp4']);
 }
 
 function windowResized() {
@@ -129,22 +125,16 @@ function setup() {
   cnv.style('background-color', color('#FCB017'));
   cnv.style('z-index', -1);
 
+
+  vid.size(windowWidth * 0.4, AUTO);
+  vid.center();
+
   recording = createDiv('Recording...'); 
   recording.style('text-align', 'center'); 
   recording.hide();
    
 
   col = color('white');
- 
-
-
-  vid = createVideo(
-    ['static/janadonate_v2.mp4'],
-    vidLoad
-  );
-
-  vid.size(windowWidth * 0.4, AUTO);
-
 
   mic = new p5.AudioIn();
   mic.start();
