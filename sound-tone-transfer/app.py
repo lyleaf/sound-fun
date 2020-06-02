@@ -91,6 +91,7 @@ def upload_to_gcs():
         file_name = request.files['audio_data'].filename # file_name is the file name
         file_path = './sound/%s' % file_name # file_path is the local file path
         file.save(file_path) 
+        print(file_name)
         blob_name = file_name # blob_name is the name on GCS
         print('blob name is %s' % blob_name)
         blob = bucket.blob(blob_name)

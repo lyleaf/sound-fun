@@ -104,10 +104,13 @@ function upload() {
   oReq.open("POST", serverUrl, true);
   var fd = new FormData(); 
   fd.append("audio_data", soundBlob, fileName)
+  oReq.onreadystatechange = function (oEvent) {
+    window.location.href = `/thankyou`;
+  };
   oReq.send(fd);
   
-  upload_button.html("Uploaded, thank you!")
-  window.location.href = `/thankyou`;
+  upload_button.html("Uploading...Please wait")
+  // window.location.href = `/thankyou`;
 }
 
 function preload() {
