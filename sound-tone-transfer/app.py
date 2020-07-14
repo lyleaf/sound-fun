@@ -40,6 +40,10 @@ def processed():
 def donate():
     return render_template('donate.html')
 
+@app.route("/poster")
+def poster():
+    return render_template('poster.html')
+
 @app.route("/processing")
 def processing():
     return render_template('processing.html')
